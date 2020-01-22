@@ -1,0 +1,22 @@
+image: node:10.16.0
+
+cache:
+  untracked: true
+  paths:
+    - node_modules/
+
+stages:
+  - setup
+  - test
+  - build
+  - deploy
+
+setup:
+  stage: setup
+  script:
+    - npm ci
+
+test:
+  stage: test
+  script:
+    - npm run test:unit
