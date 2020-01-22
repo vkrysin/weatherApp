@@ -47,7 +47,7 @@ export default {
       // Message type (Info, Success, or Error) to display on banner
       messageType: 'Info',
       // API key from openweathermap.org - Unique to each person
-      openweathermapApiKey: ''
+      openweathermapApiKey: '40060332d2d36a58983589decc0c65a9'
     }
   },
   created () {
