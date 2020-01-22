@@ -27,25 +27,31 @@ export default {
   },
   data () {
     return {
+      // Title of the application
       title: 'Vue Weather App',
-      footerMessage: 'testdriven.io 2019',
+      // Message to display in the footer
+      footerMessage: 'testdriven.io 2020',
+      // Weather data collected from openweathermap.org
       weatherData: {
         city: '',
         weatherSummary: '',
         weatherDescription: '',
         currentTemperature: 0.0,
-        lowTemperature: 0.0,
-        highTemperature: 0.0
+        highTemperature: 0.0,
+        lowTemperature: 0.0
       },
+      // Flag indicating if valid weather data has been loaded
       validWeatherData: false,
       // Message to display on banner
       messageToDisplay: '',
       // Message type (Info, Success, or Error) to display on banner
       messageType: 'Info',
+      // API key from openweathermap.org - Unique to each person
       openweathermapApiKey: ''
     }
   },
   created () {
+    // Perform a check that the API key from openweathermap.org is defined
     if (this.openweathermapApiKey === '') {
       this.messageType = 'Error'
       this.messageToDisplay = 'Error! API Key needs to be loaded to use openweathermap.org!'
@@ -53,7 +59,6 @@ export default {
   },
   methods: {
     searchCity (inputCity) {
-      // this.$store.dispatch('searchByCity', this.city)
       // GET request for user data
       axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + inputCity + '&units=imperial&APPID=' + this.openweathermapApiKey)
         .then((response) => {
@@ -62,7 +67,6 @@ export default {
           // this.messageToDisplay = 'SUCCESS! Weather data was retrieved for ' + response.data.name + '!'
           console.log(response)
 
-          // context.commit('setWeatherData', response.data)
           this.weatherData.city = response.data.name
           this.weatherData.weatherSummary = response.data.weather[0].main
           this.weatherData.weatherDescription = response.data.weather[0].description

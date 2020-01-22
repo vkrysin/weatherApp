@@ -5,17 +5,8 @@ import Weather from '@/components/Weather.vue'
 describe('Weather.vue Implementation Test', () => {
   let wrapper = null
 
-  // SETUP - run prior to each unit test
+  // SETUP - run before to each unit test
   beforeEach(() => {
-    // Do Nothing - render the components in each unit test
-  })
-
-  // TEARDOWN - run after to each unit test
-  afterEach(() => {
-    wrapper.destroy()
-  })
-
-  it('initializes with correct elements', () => {
     // render the component
     wrapper = shallowMount(Weather, {
       propsData: {
@@ -27,7 +18,14 @@ describe('Weather.vue Implementation Test', () => {
         highTemperature: 0.0
       }
     })
+  })
 
+  // TEARDOWN - run after to each unit test
+  afterEach(() => {
+    wrapper.destroy()
+  })
+
+  it('initializes with correct elements', () => {
     // check the name of the component
     expect(wrapper.name()).toMatch('Weather')
 
@@ -46,18 +44,24 @@ describe('Weather.vue Implementation Test', () => {
     expect(wrapper.findAll('p').at(5).text()).toMatch('Low (Today): 0° F')
   })
 
-  it('initializes with valid data', () => {
-    // render the component
-    wrapper = shallowMount(Weather, {
-      propsData: {
-        city: 'Chicago',
-        weatherSummary: 'Cloudy',
-        weatherDescription: 'Cloudy with a chance of rain',
-        currentTemperature: 45.1,
-        lowTemperature: 42.0,
-        highTemperature: 47.7
-      }
+  it('processes valid props data', () => {
+    // Update the props passed in to the Weather component
+    wrapper.setProps({
+      city: 'Chicago',
+      weatherSummary: 'Cloudy',
+      weatherDescription: 'Cloudy with a chance of rain',
+      currentTemperature: 45.1,
+      lowTemperature: 42.0,
+      highTemperature: 47.7
     })
+
+    // check that the prop data is stored as expected within the component
+    expect(wrapper.vm.city).toMatch('Chicago')
+    expect(wrapper.vm.weatherSummary).toMatch('Cloudy')
+    expect(wrapper.vm.weatherDescription).toMatch('Cloudy with a chance of rain')
+    expect(wrapper.vm.currentTemperature).toEqual(45.1)
+    expect(wrapper.vm.lowTemperature).toBeCloseTo(42.0)
+    expect(wrapper.vm.highTemperature).toBe(47.7)
 
     // check that the heading text is rendered
     expect(wrapper.findAll('h2').length).toEqual(2)
