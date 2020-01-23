@@ -9,7 +9,7 @@ jest.mock('axios')
 global.console.log = jest.fn();
 
 
-describe('App.vue Test with Successful HTTP GET', () => {
+describe('Implementation Test for App.vue with Successful HTTP GET', () => {
   let wrapper = null
 
   beforeEach(() => {
@@ -123,7 +123,7 @@ describe('App.vue Test with Successful HTTP GET', () => {
   })
 })
 
-describe('App.vue Test with Failed HTTP GET', () => {
+describe('Implementation Test for App.vue with Failed HTTP GET', () => {
   let wrapper = null
 
   beforeEach(() => {
