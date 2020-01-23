@@ -210,8 +210,7 @@ describe('Behavioral Test for App.vue with Successful HTTP GET', () => {
     expect(wrapper.findAll('h2').at(0).text()).toMatch('Weather Search')
 
     // check that 0 fields of weather data are displayed
-    expect(wrapper.findAll('p').length).toEqual(1)
-    expect(wrapper.findAll('p').at(0).text()).toMatch(/^$/)  // Blank Banner Message
+    expect(wrapper.findAll('p').length).toEqual(1)  // 1st element is the Banner Message
   })
 
   it('displays the weather data for a valid search', () => {
@@ -236,8 +235,7 @@ describe('Behavioral Test for App.vue with Successful HTTP GET', () => {
       expect(wrapper.findAll('h2').at(2).text()).toMatch('Temperatures')
 
       // check that 6 fields of weather data are displayed
-      expect(wrapper.findAll('p').length).toEqual(7)
-      expect(wrapper.findAll('p').at(0).text()).toMatch(/^$/)  // Blank Banner Message
+      expect(wrapper.findAll('p').length).toEqual(7)  // 1st element is the Banner Message
       expect(wrapper.findAll('p').at(1).text()).toMatch('City: Chicago')
       expect(wrapper.findAll('p').at(2).text()).toMatch('Summary: Cloudy')
       expect(wrapper.findAll('p').at(3).text()).toMatch('Details: Cloudy with a chance of rain')
