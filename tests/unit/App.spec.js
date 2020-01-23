@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import App from '@/App.vue'
 import axios from 'axios'
 
@@ -160,6 +160,90 @@ describe('Implementation Test for App.vue with Failed HTTP GET', () => {
       expect(wrapper.vm.messageType).toMatch('Error')
 
       expect(global.console.log).toHaveBeenCalledWith('BAD REQUEST');
+    })
+  })
+})
+
+describe('Behavioral Test for App.vue with Successful HTTP GET', () => {
+  let wrapper = null
+
+  beforeEach(() => {
+    const responseGet = { data:
+      {
+        name: 'Chicago',
+        weather: [
+          {
+            main: 'Cloudy',
+            description: 'Cloudy with a chance of rain'
+          }
+        ],
+        main: {
+          temp: 56.3,
+          temp_min: 53.8,
+          temp_max: 58.6
+        }
+      }
+    }
+
+    // Set the mock call to GET to return a successful GET response
+    axios.get.mockResolvedValue(responseGet)
+
+    // render the component (including all sub-components)
+    wrapper = mount(App)
+  })
+
+  afterEach(() => {
+    jest.resetModules()
+    jest.clearAllMocks()
+  })
+
+  it('initializes with the two buttons disabled and no weather data displayed', () => {
+    // check that 2 buttons are created and are disabled
+    expect(wrapper.findAll('button').length).toEqual(2)
+    expect(wrapper.findAll('button').at(0).text()).toMatch('Search')
+    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear Results')
+    expect(wrapper.findAll('button').at(0).element.disabled).toBeTruthy()
+    expect(wrapper.findAll('button').at(1).element.disabled).toBeTruthy()
+
+    // check that there is only 1 h2 element
+    expect(wrapper.findAll('h2').length).toEqual(1)
+    expect(wrapper.findAll('h2').at(0).text()).toMatch('Weather Search')
+
+    // check that 0 fields of weather data are displayed
+    expect(wrapper.findAll('p').length).toEqual(1)
+    expect(wrapper.findAll('p').at(0).text()).toMatch(/^$/)  // Blank Banner Message
+  })
+
+  it('displays the weather data for a valid search', () => {
+    // Set the input data
+    wrapper.findAll('input').at(0).setValue('Chicago')
+
+    // check that the 2 buttons are enabled
+    expect(wrapper.findAll('button').length).toEqual(2)
+    expect(wrapper.findAll('button').at(0).text()).toMatch('Search')
+    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear Results')
+    expect(wrapper.findAll('button').at(0).element.disabled).toBeFalsy()
+    expect(wrapper.findAll('button').at(1).element.disabled).toBeFalsy()
+
+    // trigger an event when the 'Search' button is clicked
+    wrapper.findAll('button').at(0).trigger('click')
+
+    wrapper.vm.$nextTick().then(function () {
+      // check that the heading text is rendered
+      expect(wrapper.findAll('h2').length).toEqual(3)
+      expect(wrapper.findAll('h2').at(0).text()).toMatch('Weather Search')
+      expect(wrapper.findAll('h2').at(1).text()).toMatch('Weather Summary')
+      expect(wrapper.findAll('h2').at(2).text()).toMatch('Temperatures')
+
+      // check that 6 fields of weather data are displayed
+      expect(wrapper.findAll('p').length).toEqual(7)
+      expect(wrapper.findAll('p').at(0).text()).toMatch(/^$/)  // Blank Banner Message
+      expect(wrapper.findAll('p').at(1).text()).toMatch('City: Chicago')
+      expect(wrapper.findAll('p').at(2).text()).toMatch('Summary: Cloudy')
+      expect(wrapper.findAll('p').at(3).text()).toMatch('Details: Cloudy with a chance of rain')
+      expect(wrapper.findAll('p').at(4).text()).toMatch('Current: 56.3° F')
+      expect(wrapper.findAll('p').at(5).text()).toMatch('High (Today): 58.6° F')
+      expect(wrapper.findAll('p').at(6).text()).toMatch('Low (Today): 53.8° F')
     })
   })
 })
