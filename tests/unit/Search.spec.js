@@ -31,7 +31,7 @@ describe('Search.vue Implementation Test', () => {
     // check that 2 buttons are created and are disabled
     expect(wrapper.findAll('button').length).toEqual(2)
     expect(wrapper.findAll('button').at(0).text()).toMatch('Search')
-    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear Results')
+    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear')
     expect(wrapper.findAll('button').at(0).element.disabled).toBeTruthy()
     expect(wrapper.findAll('button').at(1).element.disabled).toBeTruthy()
   })
@@ -49,20 +49,6 @@ describe('Search.vue Implementation Test', () => {
 
     // check that the input data is not cleared after emitting the event
     expect(wrapper.vm.inputCity).toMatch('Denver')
-  })
-
-  it('emits a custom event when resetCity() is called', () => {
-    // set the input data for the user
-    wrapper.setData({ inputCity: 'San Francisco'})
-
-    wrapper.vm.resetCity()
-
-    // check that 1 occurrence of the event has been emitted
-    expect(wrapper.emitted('reset-city')).toBeTruthy()
-    expect(wrapper.emitted('reset-city').length).toBe(1)
-
-    // check that the input data is cleared after emitting the event
-    expect(wrapper.vm.inputCity).toMatch(/^$/)
   })
 })
 
@@ -84,7 +70,7 @@ describe('Search.vue Behavioral Test', () => {
     // check that 2 buttons are created and are disabled
     expect(wrapper.findAll('button').length).toEqual(2)
     expect(wrapper.findAll('button').at(0).text()).toMatch('Search')
-    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear Results')
+    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear')
     expect(wrapper.findAll('button').at(0).element.disabled).toBeTruthy()
     expect(wrapper.findAll('button').at(1).element.disabled).toBeTruthy()
   })
@@ -96,8 +82,18 @@ describe('Search.vue Behavioral Test', () => {
     // check that 2 buttons are enabled
     expect(wrapper.findAll('button').length).toEqual(2)
     expect(wrapper.findAll('button').at(0).text()).toMatch('Search')
-    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear Results')
+    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear')
     expect(wrapper.findAll('button').at(0).element.disabled).toBeFalsy()
     expect(wrapper.findAll('button').at(1).element.disabled).toBeFalsy()
+  })
+
+  it('clears the input when clearCity() is called', () => {
+    // set the input data for the user
+    wrapper.setData({ inputCity: 'San Francisco'})
+
+    wrapper.vm.clearCity()
+
+    // check that the input data is cleared after emitting the event
+    expect(wrapper.vm.inputCity).toMatch(/^$/)
   })
 })

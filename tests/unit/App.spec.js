@@ -201,7 +201,7 @@ describe('Behavioral Test for App.vue with Successful HTTP GET', () => {
     // check that 2 buttons are created and are disabled
     expect(wrapper.findAll('button').length).toEqual(2)
     expect(wrapper.findAll('button').at(0).text()).toMatch('Search')
-    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear Results')
+    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear')
     expect(wrapper.findAll('button').at(0).element.disabled).toBeTruthy()
     expect(wrapper.findAll('button').at(1).element.disabled).toBeTruthy()
 
@@ -220,7 +220,7 @@ describe('Behavioral Test for App.vue with Successful HTTP GET', () => {
     // check that the 2 buttons are enabled
     expect(wrapper.findAll('button').length).toEqual(2)
     expect(wrapper.findAll('button').at(0).text()).toMatch('Search')
-    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear Results')
+    expect(wrapper.findAll('button').at(1).text()).toMatch('Clear')
     expect(wrapper.findAll('button').at(0).element.disabled).toBeFalsy()
     expect(wrapper.findAll('button').at(1).element.disabled).toBeFalsy()
 
@@ -242,6 +242,15 @@ describe('Behavioral Test for App.vue with Successful HTTP GET', () => {
       expect(wrapper.findAll('p').at(4).text()).toMatch('Current: 56.3° F')
       expect(wrapper.findAll('p').at(5).text()).toMatch('High (Today): 58.6° F')
       expect(wrapper.findAll('p').at(6).text()).toMatch('Low (Today): 53.8° F')
+
+      // check that the 3 buttons are enabled
+      expect(wrapper.findAll('button').length).toEqual(3)
+      expect(wrapper.findAll('button').at(0).text()).toMatch('Search')
+      expect(wrapper.findAll('button').at(1).text()).toMatch('Clear')
+      expect(wrapper.findAll('button').at(2).text()).toMatch('Clear Weather Data')
+      expect(wrapper.findAll('button').at(0).element.disabled).toBeFalsy()
+      expect(wrapper.findAll('button').at(1).element.disabled).toBeFalsy()
+      expect(wrapper.findAll('button').at(1).element.disabled).toBeFalsy()
     })
   })
 })

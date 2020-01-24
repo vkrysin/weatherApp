@@ -2,8 +2,8 @@
   <div id="app" class="grid-container">
     <app-header class="header" v-bind:title="title"></app-header>
     <app-banner class="banner" v-bind:bannerMessage="messageToDisplay" v-bind:bannerType="messageType" v-on:clear-banner="clearMessage"></app-banner>
-    <app-weather-search class="weather-search" v-on:search-city="searchCity" v-on:reset-city="resetData"></app-weather-search>
-    <app-weather-results class="weather-results" v-bind="weatherData" v-if="validWeatherData"></app-weather-results>
+    <app-weather-search class="weather-search" v-on:search-city="searchCity"></app-weather-search>
+    <app-weather-results class="weather-results" v-bind="weatherData" v-if="validWeatherData" v-on:clear-weather-data="resetData"></app-weather-results>
     <app-footer class="footer" v-bind:message="footerMessage"></app-footer>
   </div>
 </template>

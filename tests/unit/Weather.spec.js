@@ -77,4 +77,12 @@ describe('Weather.vue Implementation Test', () => {
     expect(wrapper.findAll('p').at(4).text()).toMatch('High (Today): 47.7° F')
     expect(wrapper.findAll('p').at(5).text()).toMatch('Low (Today): 42° F')
   })
+
+  it('emits a custom event when clearWeather() is called', () => {
+    wrapper.vm.clearWeather()
+
+    // check that 1 occurrence of the event has been emitted
+    expect(wrapper.emitted('clear-weather-data')).toBeTruthy()
+    expect(wrapper.emitted('clear-weather-data').length).toBe(1)
+  })
 })

@@ -9,7 +9,7 @@
       <br>
       <div class="weather-search-buttons">
         <button type="submit" v-on:click="searchCity" v-bind:disabled="searchDisabled">Search</button>
-        <button type="reset" v-on:click="resetCity" v-bind:disabled="resetDisabled">Clear Results</button>
+        <button type="reset" v-on:click="clearCity" v-bind:disabled="clearDisabled">Clear</button>
       </div>
     </div>
   </div>
@@ -27,8 +27,8 @@ export default {
     searchCity () {
       this.$emit('search-city', this.inputCity)
     },
-    resetCity () {
-      this.$emit('reset-city')
+    clearCity () {
+      // this.$emit('reset-city')
       this.inputCity = ''
     }
   },
@@ -40,7 +40,7 @@ export default {
         return true
       }
     },
-    resetDisabled () {
+    clearDisabled () {
       if (this.inputCity) {
         return false
       } else {
@@ -66,9 +66,6 @@ export default {
 }
 
 .weather-search-buttons {
-  /* margin-top: 0.5em;
-  margin-bottom: 0.5em;
- */
   margin: 0.5em;
 }
 
