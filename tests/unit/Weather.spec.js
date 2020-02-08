@@ -78,8 +78,9 @@ describe('Weather.vue Implementation Test', () => {
     expect(wrapper.findAll('p').at(5).text()).toMatch('Low (Today): 42° F')
   })
 
-  it('emits a custom event when clearWeather() is called', () => {
-    wrapper.vm.clearWeather()
+  it('emits a custom event when the Clear Weather Data button is clicked', () => {
+    // trigger an event when the 'Clear Weather Data' button is clicked
+    wrapper.findAll('button').at(0).trigger('click')
 
     // check that 1 occurrence of the event has been emitted
     expect(wrapper.emitted('clear-weather-data')).toBeTruthy()
