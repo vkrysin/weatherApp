@@ -6,3 +6,4 @@ jobs:
     - stage: Produce Coverage
       node_js: node
       script: npm run test:unit 
+      after_script: cat ./coverage/lcov.info | coveralls
