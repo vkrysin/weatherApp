@@ -38,7 +38,8 @@ export default {
         weatherDescription: '',
         currentTemperature: 0.0,
         highTemperature: 0.0,
-        lowTemperature: 0.0
+        lowTemperature: 0.0,
+        snowVolume: 0.0
       },
       // Flag indicating if valid weather data has been loaded
       validWeatherData: false,
@@ -47,7 +48,7 @@ export default {
       // Message type (Info, Success, or Error) to display on banner
       messageType: 'Info',
       // API key from openweathermap.org - Unique to each person
-      openweathermapApiKey: ''
+      openweathermapApiKey: '4ad5cbc32c39d982d11436dff37d0dd3'
     }
   },
   created () {
@@ -60,7 +61,7 @@ export default {
   methods: {
     searchCity (inputCity) {
       // GET request for user data
-      axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + inputCity + '&units=imperial&APPID=' + this.openweathermapApiKey)
+      axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + inputCity + '&units=metric&appid=' + this.openweathermapApiKey)
         .then((response) => {
           // handle success
           // this.messageType = 'Success'
@@ -94,7 +95,8 @@ export default {
         weatherDescription: '',
         currentTemperature: 0.0,
         lowTemperature: 0.0,
-        highTemperature: 0.0
+        highTemperature: 0.0,
+        snowVolume: 0.0
       }
       this.validWeatherData = false
     },

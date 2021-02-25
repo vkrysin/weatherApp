@@ -18,9 +18,9 @@
           <h2>Temperatures</h2>
         </div>
         <div class="weather-data">
-          <p><strong>Current</strong>: {{ currentTemperature }}° F</p>
-          <p><strong>High (Today)</strong>: {{ highTemperature }}° F</p>
-          <p><strong>Low (Today)</strong>: {{ lowTemperature }}° F</p>
+          <p><strong>Current</strong>: {{ currentTemperature }}° С</p>
+          <p><strong>High (Today)</strong>: {{ highTemperature }}° С</p>
+          <p><strong>Low (Today)</strong>: {{ lowTemperature }}° С</p>
         </div>
       </div>
     </div>
