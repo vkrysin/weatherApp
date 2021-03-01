@@ -1,10 +1,14 @@
 <template>
-  <div id="app" class="grid-container">
-    <app-header class="header" v-bind:title="title"></app-header>
-    <app-banner class="banner" v-bind:bannerMessage="messageToDisplay" v-bind:bannerType="messageType" v-on:clear-banner="clearMessage"></app-banner>
-    <app-weather-search class="weather-search" v-on:search-city="searchCity"></app-weather-search>
-    <app-weather-results class="weather-results" v-bind="weatherData" v-if="validWeatherData" v-on:clear-weather-data="resetData"></app-weather-results>
-    <app-footer class="footer" v-bind:message="footerMessage"></app-footer>
+  <div>
+    <div id="app" class="grid-container" v-if="registrationWindow">
+      <app-header class="header" v-bind:title="title"></app-header>
+      <button class="registration-exit-button">Registration</button>
+      <app-banner class="banner" v-bind:bannerMessage="messageToDisplay" v-bind:bannerType="messageType" v-on:clear-banner="clearMessage"></app-banner>
+      <app-weather-search class="weather-search" v-on:search-city="searchCity"></app-weather-search>
+      <app-weather-results class="weather-results" v-bind="weatherData" v-if="validWeatherData" v-on:clear-weather-data="resetData"></app-weather-results>
+      <app-footer class="footer" v-bind:message="footerMessage"></app-footer>
+    </div>
+    <registration></registration>
   </div>
 </template>
 
@@ -14,6 +18,7 @@ import Header from '@/components/Header.vue'
 import Banner from '@/components/Banner.vue'
 import Search from '@/components/Search.vue'
 import Weather from '@/components/Weather.vue'
+import Registration from '@/components/Registration.vue'
 import axios from 'axios'
 
 export default {
@@ -23,7 +28,8 @@ export default {
     'app-footer': Footer,
     'app-banner': Banner,
     'app-weather-search': Search,
-    'app-weather-results': Weather
+    'app-weather-results': Weather,
+    'registration': Registration
   },
   data () {
     return {
@@ -41,6 +47,7 @@ export default {
         lowTemperature: 0.0,
         snowVolume: 0.0
       },
+      registrationWindow: false,
       // Flag indicating if valid weather data has been loaded
       validWeatherData: false,
       // Message to display on banner
@@ -130,6 +137,25 @@ body {
 .header {
   grid-area: header;
 }
+.registration-exit-button {
+  background-color:#44c767;
+  border-radius:14px;
+  border:1px solid #18ab29;
+  max-width: 220px;
+  max-height: 43px;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:18px;
+  font-weight:bold;
+  margin-top: 10px;
+  padding:9px 35px;
+  text-decoration:none;
+  grid-area: registration-exit-button;
+}
+.registration-exit-button:hover {
+  background-color:#5cbf2a;
+}
+
 .banner {
   grid-area: banner;
 }
@@ -145,16 +171,16 @@ body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 10% 35% 35% 10%;
+  grid-template-columns: 25% 15% 20% 15% 20%;
   grid-auto-rows: minmax(20px, auto);
   grid-gap: 10px;
-  max-width: 1080px;
+  max-width: 1440px;
   margin: auto;
   grid-template-areas:
-    "header   header     header    header"
-    "banner   banner     banner    banner"
-    "...      search     search    ..."
-    "...      results    results   ..."
-    "footer   footer     footer    footer";
+    "...   header     header     registration-exit-button ..."
+    "...   banner     banner     ... ..."
+    "...   search     search     ... ..."
+    "...   results    results    ... ..."
+    "...   footer     footer     ... ...";
 }
 </style>

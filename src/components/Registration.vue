@@ -1,0 +1,54 @@
+<template>
+    <div>
+        <div class="form">
+            <label for="email">Email</label>
+            <input type="email" id="email">
+            <label for="password">Password</label>
+            <input type="password" id="password">
+            <input type="submit" id="submit" value="Submit">
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+  name: 'Registration'
+}
+</script>
+
+<style>
+.form {
+  margin: 40px;
+  position: absolute;
+  background-color: white;
+}
+label {
+  color:  #c2c2c5;
+  display: block;
+  font-size: 14px;
+  height: 16px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+input {
+  background: transparent;
+  border: 0;
+  color: #f2f2f2;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
+  width: 100%;
+}
+#submit {
+  color: #707075;
+  margin-top: 40px;
+  transition: color 300ms;
+}
+#submit:focus {
+  color: #f2f2f2;
+}
+#submit:active {
+  color: #d0d0d2;
+}
+</style>

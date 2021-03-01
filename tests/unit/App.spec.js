@@ -6,8 +6,7 @@ import axios from 'axios'
 jest.mock('axios')
 
 // Spy the console log
-global.console.log = jest.fn();
-
+global.console.log = jest.fn()
 
 describe('Implementation Test for App.vue with Successful HTTP GET', () => {
   let wrapper = null
@@ -84,14 +83,14 @@ describe('Implementation Test for App.vue with Successful HTTP GET', () => {
   it('resets the weather data when resetData() is called', () => {
     // set the input data for the user
     wrapper.setData({ weatherData: {
-        city: 'Boise',
-        weatherSummary: 'Sunny',
-        weatherDescription: 'No clouds in the sky',
-        currentTemperature: 75.5,
-        highTemperature: 78.6,
-        lowTemperature: 48.9
-      },
-      validWeatherData: false
+      city: 'Boise',
+      weatherSummary: 'Sunny',
+      weatherDescription: 'No clouds in the sky',
+      currentTemperature: 75.5,
+      highTemperature: 78.6,
+      lowTemperature: 48.9
+    },
+    validWeatherData: false
     })
 
     wrapper.vm.resetData()
@@ -159,7 +158,7 @@ describe('Implementation Test for App.vue with Failed HTTP GET', () => {
       expect(wrapper.vm.messageToDisplay).toMatch('ERROR! Unable to retrieve weather data for Chicago!')
       expect(wrapper.vm.messageType).toMatch('Error')
 
-      expect(global.console.log).toHaveBeenCalledWith('BAD REQUEST');
+      expect(global.console.log).toHaveBeenCalledWith('BAD REQUEST')
     })
   })
 })
@@ -210,7 +209,7 @@ describe('Behavioral Test for App.vue with Successful HTTP GET', () => {
     expect(wrapper.findAll('h2').at(0).text()).toMatch('Weather Search')
 
     // check that 0 fields of weather data are displayed
-    expect(wrapper.findAll('p').length).toEqual(1)  // 1st element is the Banner Message
+    expect(wrapper.findAll('p').length).toEqual(1) // 1st element is the Banner Message
   })
 
   it('displays the weather data for a valid search', () => {

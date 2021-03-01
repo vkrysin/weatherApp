@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import Banner from '@/components/Banner.vue'
 
-
 describe('Banner.vue Implementation Test', () => {
   let wrapper = null
 
