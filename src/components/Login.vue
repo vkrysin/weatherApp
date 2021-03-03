@@ -3,15 +3,12 @@
         <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
         <form action="#" method="post" name="sign up for beta form">
           <div class="header">
-            <p>Sign Up</p>
-          </div>
-          <div class="description">
-            <p>Registration will access you to additional features!</p>
+            <p>Sign In</p>
           </div>
           <div class="input">
-            <input type="text" class="button" id="email" name="email" placeholder="NAME@EXAMPLE.COM">
+            <input type="text" class="button" id="email" name="email" placeholder="Enter your email">
             <router-link to="/" tag="div">
-              <input type="submit" class="button" id="submit" value="SIGN UP">
+              <input type="submit" class="button" id="submit" value="SIGN IN">
             </router-link>
           </div>
       </form>
@@ -20,7 +17,7 @@
 
 <script>
 export default {
-  name: 'Registration',
+  name: 'Login',
   data () {
     return {
       formData: {
@@ -49,13 +46,6 @@ form {
   font-size: 35px;
   text-transform: uppercase;
   letter-spacing: 5px;
-}
-
-.description {
-  font-size: 14px;
-  letter-spacing: 1px;
-  line-height: 1.3em;
-  margin: -2px 0 25px;
 }
 
 .input {
