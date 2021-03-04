@@ -9,8 +9,8 @@
             <p>Registration will access you to additional features!</p>
           </div>
           <div class="input">
-            <input type="text" class="button" ref="email" id="email" name="email" placeholder="NAME@EXAMPLE.COM">
-            <input type="text" class="button" ref="username" id="username" name="username" placeholder="USERNAME">
+            <input type="text" class="button" ref="email" id="email" name="email" placeholder="NAME@EXAMPLE.COM" autocomplete="off">
+            <input type="text" class="button" ref="username" id="username" name="username" placeholder="USERNAME" autocomplete="off">
             <router-link to="/" tag="div">
               <input v-on:click="setCurrentUserEmail" type="submit" class="button" id="submit" value="SIGN UP">
             </router-link>
@@ -31,7 +31,12 @@ export default {
   },
   methods: {
     setCurrentUserEmail: function () {
-      this.$store.state.users.push(this.$refs.email.value)
+      // add new user in storage
+      this.$store.state.users.push({
+        userEmail: this.$refs.email.value,
+        userName: this.$refs.username.value
+      })
+      // add current user email and name
       this.$store.state.userName = this.$refs.username.value
       this.$store.commit('setEmail', this.$refs.email.value)
     }

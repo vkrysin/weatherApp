@@ -5,13 +5,11 @@
           <div class="header">
             <p>Sign In</p>
           </div>
-          <div class="input">
-            <input type="text" class="button" id="email" name="email" placeholder="Enter your email">
-            <router-link to="/" tag="div">
-              <input type="submit" class="button" id="submit" value="SIGN IN">
-            </router-link>
-          </div>
-      </form>
+          <div v-if="errorSignIn" class="wrong-data">Falied to sign-In. Invalid email or user name</div>
+          <input type="text" ref="email" class="button" id="email" name="email" placeholder="Enter your email" autocomplete="off">
+          <input type="text" ref="username" class="button" id="email" name="username" placeholder="Enter your username" autocomplete="off">
+          <input type="button" class="button" id="submit" value="SIGN IN" @click="findEmailInBase">
+       </form>
   </div>
 </template>
 
@@ -22,6 +20,27 @@ export default {
     return {
       formData: {
         Email: ''
+      },
+      errorSignIn: false
+    }
+  },
+  methods: {
+    findEmailInBase () {
+      let email = this.$refs.email.value
+      let name = this.$refs.username.value
+      // delete null object
+      this.$store.state.users = this.$store.state.users.filter(el => el !== null)
+
+      let isUserContainsInBase = this.$store.state.users.filter(element => {
+        return element.userName === name
+      })
+      if (isUserContainsInBase.length > 0) {
+        this.$store.state.userEmail = email
+        this.$store.state.userName = name
+        this.$router.push({ path: '/' })
+        this.errorSignIn = false
+      } else {
+        this.errorSignIn = true
       }
     }
   }
@@ -46,13 +65,16 @@ form {
   font-size: 35px;
   text-transform: uppercase;
   letter-spacing: 5px;
+  margin-bottom: 5px;
 }
-
-.input {
+.container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
-
+.wrong-data {
+  width: fit-content;
+  background-color: red;
+}
 .button {
   height: 44px;
   border: none;
@@ -66,10 +88,11 @@ form {
   letter-spacing: 1px;
   text-indent: 5%;
   border-radius: 5px 0 0 5px;
+  margin-bottom: 5px;
 }
 
 #submit {
-  width: 100px;
+  width: 75%;
   height: 46px;
   background: #E86C8D;
   font-family: inherit;

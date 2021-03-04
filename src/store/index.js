@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    // Array of user email that have registrated {emali, password}
+    // Array of user email that have registrated {emali, name}
     users: [],
     userEmail: '',
     userName: ''
