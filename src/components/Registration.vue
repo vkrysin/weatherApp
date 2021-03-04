@@ -9,9 +9,10 @@
             <p>Registration will access you to additional features!</p>
           </div>
           <div class="input">
-            <input type="text" class="button" id="email" name="email" placeholder="NAME@EXAMPLE.COM">
+            <input type="text" class="button" ref="email" id="email" name="email" placeholder="NAME@EXAMPLE.COM">
+            <input type="text" class="button" ref="username" id="username" name="username" placeholder="USERNAME">
             <router-link to="/" tag="div">
-              <input type="submit" class="button" id="submit" value="SIGN UP">
+              <input v-on:click="setCurrentUserEmail" type="submit" class="button" id="submit" value="SIGN UP">
             </router-link>
           </div>
       </form>
@@ -26,6 +27,13 @@ export default {
       formData: {
         Email: ''
       }
+    }
+  },
+  methods: {
+    setCurrentUserEmail: function () {
+      this.$store.state.users.push(this.$refs.email.value)
+      this.$store.state.userName = this.$refs.username.value
+      this.$store.commit('setEmail', this.$refs.email.value)
     }
   }
 }
@@ -59,15 +67,27 @@ form {
 }
 
 .input {
-  display: flex;
   align-items: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
 .button {
   height: 44px;
   border: none;
 }
-
+#username {
+  width: 75%;
+  background: #FDFCFB;
+  font-family: inherit;
+  color: #737373;
+  letter-spacing: 1px;
+  text-indent: 5%;
+  border-radius: 5px 0 0 5px;
+  margin-bottom: 10px;
+}
 #email {
   width: 75%;
   background: #FDFCFB;
@@ -76,10 +96,11 @@ form {
   letter-spacing: 1px;
   text-indent: 5%;
   border-radius: 5px 0 0 5px;
+  margin-bottom: 10px;
 }
 
 #submit {
-  width: 100px;
+  width: 75%;
   height: 46px;
   background: #E86C8D;
   font-family: inherit;

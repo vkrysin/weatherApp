@@ -2,10 +2,9 @@
   <div>
     <div id="app" class="grid-container">
       <app-header class="header" v-bind:title="title"></app-header>
-      <div v-if="isAuthorized">
-        <div class="helloMessage">Welcome</div>
-      </div>
-      <div class="entry">
+      <button v-if="this.$store.state.userEmail !== ''" class="exit" @click="exit">Exit</button>
+      <favorites v-if="this.$store.state.userEmail !== ''"></favorites>
+      <div v-else class="entry">
         <router-link class="registration-login-button" to="/registration">Registration</router-link>
         <router-link class="registration-login-button" to="/login">Login</router-link>
       </div>
@@ -23,6 +22,7 @@ import Header from '@/components/Header.vue'
 import Banner from '@/components/Banner.vue'
 import Search from '@/components/Search.vue'
 import Weather from '@/components/Weather.vue'
+import Favorites from '@/components/Favorites.vue'
 import axios from 'axios'
 
 export default {
@@ -32,7 +32,8 @@ export default {
     'app-footer': Footer,
     'app-banner': Banner,
     'app-weather-search': Search,
-    'app-weather-results': Weather
+    'app-weather-results': Weather,
+    'favorites': Favorites
   },
   data () {
     return {
@@ -50,9 +51,6 @@ export default {
         lowTemperature: 0.0,
         snowVolume: 0.0
       },
-      // Array of user that have registrated {emali, password}
-      users: [],
-
       isAuthorized: false,
       // Flag indicating if valid weather data has been loaded
       validWeatherData: false,
@@ -62,6 +60,11 @@ export default {
       messageType: 'Info',
       // API key from openweathermap.org - Unique to each person
       openweathermapApiKey: '4ad5cbc32c39d982d11436dff37d0dd3'
+    }
+  },
+  computed: {
+    userEmail () {
+      return this.$store.state.userEmail
     }
   },
   created () {
@@ -116,6 +119,9 @@ export default {
     clearMessage () {
       this.messageToDisplay = ''
       this.messageType = 'Info'
+    },
+    exit () {
+      this.$store.state.userEmail = ''
     }
   }
 }
@@ -165,7 +171,9 @@ body {
 .registration-login-button:hover {
   background-color:#5cbf2a;
 }
-
+.favorites {
+  grid-area: favorites;
+}
 .banner {
   grid-area: banner;
 }
@@ -178,7 +186,10 @@ body {
 .footer {
   grid-area: footer;
 }
-
+.exit {
+  margin-top: 10px;
+  grid-area: exit;
+}
 .grid-container {
   display: grid;
   grid-template-columns: 20% 25% 25% 15% 15%;
@@ -187,10 +198,11 @@ body {
   max-width: 1440px;
   margin: auto;
   grid-template-areas:
-    "...   header     header     entry ..."
-    "...   banner     banner     ... ..."
-    "...   search     search     ... ..."
-    "...   results    results    ... ..."
-    "...   footer     footer     ... ...";
+    "...   header     header     entry exit"
+    "...   banner     banner     favorites ..."
+    "...   search     search     favorites ..."
+    "...   results    results    favorites ..."
+    "...   footer     footer     favorites ...";
 }
+
 </style>
