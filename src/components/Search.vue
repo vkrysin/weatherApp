@@ -11,6 +11,7 @@
         <button type="submit" v-on:click="searchCity" v-bind:disabled="searchDisabled">Search</button>
         <button type="reset" v-on:click="clearCity" v-bind:disabled="clearDisabled">Clear</button>
       </div>
+      <div class="addToFavorite"></div>
     </div>
   </div>
 </template>

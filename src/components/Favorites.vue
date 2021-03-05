@@ -3,7 +3,10 @@
       <h2 class="greetings">Welcome, {{this.$store.state.userName}}</h2>
         <h3>Your favorites place:</h3>
         <ul class="favorites__list">
-           <li><button>Moscow</button></li>
+           <li>
+             <div>Moscow</div>
+             <button class="delete"><img src="../assets/redAcross.png"></button>
+             </li>
         </ul>
     </div>
 </template>
@@ -28,32 +31,25 @@ export default {
 }
 
 .favorites__list li {
+  display: flex;
   position: relative;
   list-style-type: none;
-  padding-left: 2.5rem;
+  padding-left: 1rem;
   margin-bottom: 0.5rem;
 }
-
-.favorites__list li:before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: -2px;
-    width: 5px;
-    height: 11px;
-    border-width: 0 2px 2px 0;
-    border-style: solid;
-    border-color: #00a8a8;
-    transform-origin: bottom left;
-    transform: rotate(45deg);
+.favorites li div {
+  border: 1px solid rebeccapurple;
+  border-radius: 0.3rem;
+  padding: 2px 15px;
+  font-size: 15px;
+  background: rebeccapurple;
+  color: white;
 }
-.favorites li > button {
-    border: 1px solid rebeccapurple;
-    border-radius: 0.3rem;
-    padding: 2px 15px;
-    font-size: 15px;
-    background: rebeccapurple;
-    color: white;
+.favorites__list .delete {
+  margin-left: 10px;
+}
+.favorites__list .delete img {
+  vertical-align: middle;
+  height: 16px;
 }
 </style>
