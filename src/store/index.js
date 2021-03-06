@@ -8,7 +8,6 @@ const store = new Vuex.Store({
   state: {
     // Array of user email that have registrated {emali, name}
     users: [],
-    favoritePlaces: new Map(),
     userEmail: '',
     userName: ''
   },
