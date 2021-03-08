@@ -173,6 +173,8 @@ body {
   background-color:#5cbf2a;
 }
 .favorites {
+  /*hack, because i didn't do css structure */
+  margin-top: -250px;
   grid-area: favorites;
 }
 .banner {
@@ -200,10 +202,11 @@ body {
   margin: auto;
   grid-template-areas:
     "...   header     header     entry exit"
-    "...   banner     banner     favorites ..."
-    "...   search     search     favorites ..."
-    "...   results    results    favorites ..."
-    "...   footer     footer     favorites ...";
+    "...   banner     banner     ... ..."
+    "...   search     search     ... ..."
+    "...   results    results    ... ..."
+    "...   footer     footer     ... ..."
+    "...   ...        ...        favorites ...";
 }
 
 </style>
