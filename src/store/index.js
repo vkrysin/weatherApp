@@ -11,7 +11,8 @@ const store = new Vuex.Store({
     // object with field {username1: [places1], username2:[places2] }
     favoritePlaces: {},
     userEmail: '',
-    userName: ''
+    userName: '',
+    addToFavoriteShow: false
   },
   getters: {
     getEmail: (state) => {
@@ -24,8 +25,9 @@ const store = new Vuex.Store({
     },
     addToFavorite (state, place) {
       let valueArr = state.favoritePlaces[state.userName] || []
-      valueArr.push(place)
+      valueArr.push(place.toLowerCase())
       state.favoritePlaces[state.userName] = valueArr
+      state.addToFavoriteShow = false
     }
   },
   actions: {},

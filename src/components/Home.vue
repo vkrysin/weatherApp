@@ -91,6 +91,10 @@ export default {
           this.weatherData.lowTemperature = response.data.main.temp_min
           this.weatherData.highTemperature = response.data.main.temp_max
           this.validWeatherData = true
+          // show addToFavorite button(yellow star)
+          if (!this.$store.state.favoritePlaces[this.$store.state.userName].includes(inputCity.toLowerCase())) {
+            this.$store.state.addToFavoriteShow = true
+          }
         })
         .catch((error) => {
           // handle error

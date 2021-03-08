@@ -11,8 +11,7 @@
         <button type="submit" v-on:click="searchCity" v-bind:disabled="searchDisabled">Search</button>
         <button type="reset" v-on:click="clearCity" v-bind:disabled="clearDisabled">Clear</button>
         <button v-on:click="() => {this.$store.commit('addToFavorite', this.inputCity)}"
-                v-if="this.$store.state.userEmail !== ''" id="addToFavorite"
-                v-bind:disabled="searchDisabled">
+                v-if="this.$store.state.addToFavoriteShow" id="addToFavorite">
           <img src="../assets/yellowStar.png">
         </button>
       </div>
@@ -23,6 +22,7 @@
 <script>
 export default {
   name: 'Search',
+  props: ['addDisabled'],
   data () {
     return {
       inputCity: ''
