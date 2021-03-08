@@ -3,21 +3,27 @@
       <h2 class="greetings">Welcome, {{this.$store.state.userName}}</h2>
         <h3>Your favorites place:</h3>
         <ul class="favorites__list">
-           <li>
-             <div>Moscow</div>
-             <button class="delete"><img src="../assets/redAcross.png"></button>
-             </li>
+           <favoriteRecord
+              v-for="item in this.$store.state.favoritePlaces[this.$store.state.userName]"
+              :key="item"
+              :cityName="item">
+           </favoriteRecord>
         </ul>
     </div>
 </template>
 
 <script>
+import favoriteRecord from '@/components/favoriteRecord.vue'
+
 export default {
-  name: 'Favorites'
+  name: 'Favorites',
+  components: {
+    'favoriteRecord': favoriteRecord
+  }
 }
 </script>
 
-<style scoped>
+<style>
 .favorites {
   display: flex;
   flex-direction: column;
@@ -37,7 +43,7 @@ export default {
   padding-left: 1rem;
   margin-bottom: 0.5rem;
 }
-.favorites li div {
+.favorites li button:first-child {
   border: 1px solid rebeccapurple;
   border-radius: 0.3rem;
   padding: 2px 15px;
@@ -45,8 +51,15 @@ export default {
   background: rebeccapurple;
   color: white;
 }
+.favorites li button:first-child:active {
+  background-color: rgb(79, 50, 109);
+}
 .favorites__list .delete {
   margin-left: 10px;
+}
+.favorites__list .delete img {
+  vertical-align: middle;
+  height: 16px;
 }
 .favorites__list .delete img {
   vertical-align: middle;
