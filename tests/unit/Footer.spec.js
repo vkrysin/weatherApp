@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import Footer from '@/components/Footer.vue'
 
-
 describe('Footer.vue Test', () => {
   it('renders message when component is created', () => {
     // render the component
