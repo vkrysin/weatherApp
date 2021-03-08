@@ -122,6 +122,7 @@ export default {
     },
     exit () {
       this.$store.state.userEmail = ''
+      this.$store.state.userName = ''
     }
   }
 }

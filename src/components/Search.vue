@@ -10,6 +10,11 @@
       <div class="weather-search-buttons">
         <button type="submit" v-on:click="searchCity" v-bind:disabled="searchDisabled">Search</button>
         <button type="reset" v-on:click="clearCity" v-bind:disabled="clearDisabled">Clear</button>
+        <button v-on:click="() => {this.$store.commit('addToFavorite', this.inputCity)}"
+                v-if="this.$store.state.userEmail !== ''" id="addToFavorite"
+                v-bind:disabled="searchDisabled">
+          <img src="../assets/yellowStar.png">
+        </button>
       </div>
     </div>
   </div>
@@ -66,7 +71,9 @@ export default {
 }
 
 .weather-search-buttons {
-  margin: 0.5em;
+  display: flex;
+  margin-top: 10px;
+  margin-left: 45px;
 }
 
 .weather-search-input {
@@ -101,5 +108,14 @@ export default {
 .weather-search-buttons button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+#addToFavorite {
+  padding: 0px;
+  border-radius: 0px;
+  background-color: #f1f3f5;
+}
+#addToFavorite img {
+  height: 32px;
+  background-color: #f1f3f5;
 }
 </style>

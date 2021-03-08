@@ -8,6 +8,7 @@ const store = new Vuex.Store({
   state: {
     // Array of user email that have registrated {emali, name}
     users: [],
+    favoritePlaces: {},
     userEmail: '',
     userName: ''
   },
@@ -19,6 +20,11 @@ const store = new Vuex.Store({
   mutations: {
     setEmail (state, email) {
       state.userEmail = email
+    },
+    addToFavorite (state, place) {
+      let valueArr = state.favoritePlaces[state.userName] || []
+      valueArr.push(place)
+      state.favoritePlaces[state.userName] = valueArr
     }
   },
   actions: {},

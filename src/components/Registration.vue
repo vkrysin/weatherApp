@@ -39,6 +39,8 @@ export default {
       // add current user email and name
       this.$store.state.userName = this.$refs.username.value
       this.$store.commit('setEmail', this.$refs.email.value)
+      // set array for favorite countries
+      this.$store.state.favoritePlaces[this.$refs.username.value] = []
     }
   }
 }
