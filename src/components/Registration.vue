@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 <template>
   <div class="container">
         <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
@@ -40,7 +42,7 @@ export default {
       this.$store.state.userName = this.$refs.username.value
       this.$store.commit('setEmail', this.$refs.email.value)
       // set array for favorite countries
-      this.$store.state.favoritePlaces[this.$refs.username.value] = []
+      this.$store.commit('setInitialFavoritePlaces', this.$refs.username.value)
     }
   }
 }

@@ -25,10 +25,14 @@ const store = new Vuex.Store({
     setEmail (state, email) {
       state.userEmail = email
     },
+    setInitialFavoritePlaces (state, userName) {
+      Vue.set(state.favoritePlaces, userName, [])
+    },
     addToFavorite (state, place) {
       let valueArr = state.favoritePlaces[state.userName] || []
       valueArr.push(place.toLowerCase())
-      state.favoritePlaces[state.userName] = valueArr
+      // use vue.set for reactivity
+      Vue.set(state.favoritePlaces, state.userName, valueArr)
       state.addToFavoriteShow = false
     }
   },
