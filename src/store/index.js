@@ -12,6 +12,8 @@ const store = new Vuex.Store({
     favoritePlaces: {},
     userEmail: '',
     userName: '',
+    searchBtn: '',
+    inputCity: '',
     addToFavoriteShow: false
   },
   getters: {

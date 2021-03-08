@@ -177,9 +177,9 @@ body {
   background-color:#5cbf2a;
 }
 .favorites {
-  /*hack, because i didn't do css structure */
-  margin-top: -250px;
-  grid-area: favorites;
+  position: absolute;
+  top: 40px;
+  left: 1050px;
 }
 .banner {
   grid-area: banner;
@@ -209,8 +209,7 @@ body {
     "...   banner     banner     ... ..."
     "...   search     search     ... ..."
     "...   results    results    ... ..."
-    "...   footer     footer     ... ..."
-    "...   ...        ...        favorites ...";
+    "...   footer     footer     ... ...";
 }
 
 </style>
