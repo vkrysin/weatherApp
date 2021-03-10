@@ -34,6 +34,11 @@ const store = new Vuex.Store({
       // use vue.set for reactivity
       Vue.set(state.favoritePlaces, state.userName, valueArr)
       state.addToFavoriteShow = false
+    },
+    checkShowFavorite (state, inputCity) {
+      if (!state.favoritePlaces[state.userName].includes(inputCity.toLowerCase())) {
+        state.addToFavoriteShow = true
+      }
     }
   },
   actions: {},

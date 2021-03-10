@@ -75,9 +75,9 @@ export default {
     }
   },
   methods: {
-    searchCity (inputCity) {
+    async searchCity (inputCity) {
       // GET request for user data
-      axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + inputCity + '&units=metric&appid=' + this.openweathermapApiKey)
+      await axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + inputCity + '&units=metric&appid=' + this.openweathermapApiKey)
         .then((response) => {
           // handle success
           // this.messageType = 'Success'
@@ -92,9 +92,7 @@ export default {
           this.weatherData.highTemperature = response.data.main.temp_max
           this.validWeatherData = true
           // show addToFavorite button(yellow star)
-          if (!this.$store.state.favoritePlaces[this.$store.state.userName].includes(inputCity.toLowerCase())) {
-            this.$store.state.addToFavoriteShow = true
-          }
+          this.$store.commit('checkShowFavorite', inputCity)
         })
         .catch((error) => {
           // handle error

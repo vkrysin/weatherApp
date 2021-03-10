@@ -9,7 +9,6 @@ describe('Footer.vue Test', () => {
         message: 'testdriven.io 2019'
       }
     })
-
     // check the name of the component
     expect(wrapper.name()).toMatch('Footer')
 

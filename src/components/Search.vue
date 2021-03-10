@@ -8,7 +8,7 @@
       <input ref="inputCity" type="text" id="cityInput" v-model="inputCity" placeholder="Enter a city name...">
       <br>
       <div class="weather-search-buttons">
-        <button ref="search" type="submit" v-on:click="searchCity" v-bind:disabled="searchDisabled">Search</button>
+        <button ref="search" type="submit" v-on:click="searchCity" v-bind:disabled="searchDisabled" class="sea">Search</button>
         <button type="reset" v-on:click="clearCity" v-bind:disabled="clearDisabled">Clear</button>
         <button v-on:click="() => {this.$store.commit('addToFavorite', this.inputCity)}"
                 v-if="this.$store.state.addToFavoriteShow" id="addToFavorite">
@@ -22,7 +22,6 @@
 <script>
 export default {
   name: 'Search',
-  props: ['addDisabled'],
   data () {
     return {
       inputCity: ''
