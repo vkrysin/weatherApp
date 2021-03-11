@@ -1,5 +1,5 @@
 <template>
-  <div v-show="bannerMessage" v-bind:style="{ 'background-color': bannerBackgroundColor }">
+  <div v-show="bannerMessage">
     <span id="errorMessageClear" v-on:click="clearBannerMessage">Clear</span>
     <p>{{ bannerMessage }}</p>
   </div>
@@ -10,20 +10,7 @@ export default {
   name: 'Banner',
   props: {
     // Message to display on banner
-    bannerMessage: String,
-    // Banner Types: Info, Error, or Success
-    bannerType: String
-  },
-  computed: {
-    bannerBackgroundColor () {
-      if (this.bannerType === 'Error') {
-        return 'red'
-      } else if (this.bannerType === 'Success') {
-        return 'green'
-      } else {
-        return 'blue'
-      }
-    }
+    bannerMessage: String
   },
   methods: {
     clearBannerMessage () {
@@ -39,6 +26,7 @@ div {
   width: 100%;
   display:inline-block;
   margin-bottom: 15px;
+  background-color: red;
 }
 
 span, p {

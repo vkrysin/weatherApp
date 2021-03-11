@@ -40,7 +40,7 @@ export default {
       // Title of the application
       title: 'Vue Weather App',
       // Message to display in the footer
-      footerMessage: 'testdriven.io 2020',
+      footerMessage: 'testdriven.io 2021',
       // Weather data collected from openweathermap.org
       weatherData: {
         city: '',

@@ -6,13 +6,13 @@ describe('Footer.vue Test', () => {
     // render the component
     const wrapper = shallowMount(Footer, {
       propsData: {
-        message: 'testdriven.io 2019'
+        message: 'testdriven.io 2021'
       }
     })
     // check the name of the component
     expect(wrapper.name()).toMatch('Footer')
 
     // check that the title is rendered
-    expect(wrapper.text()).toMatch('testdriven.io 2019')
+    expect(wrapper.text()).toMatch('testdriven.io 2021')
   })
 })
