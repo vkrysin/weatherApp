@@ -27,7 +27,6 @@ describe('Banner.vue Implementation Test', () => {
 
     // check that each element of the user is initialized to empty strings
     expect(wrapper.vm.bannerMessage).toMatch('')
-    expect(wrapper.vm.bannerBackgroundColor).toMatch('red')
   })
 
   it('initializes with message', () => {
@@ -40,7 +39,6 @@ describe('Banner.vue Implementation Test', () => {
 
     // check that each element of the user is initialized to empty strings
     expect(wrapper.vm.bannerMessage).toMatch('Banner message 123')
-    expect(wrapper.vm.bannerBackgroundColor).toMatch('red')
   })
 
   it('emits an event when the clear button is clicked', () => {
