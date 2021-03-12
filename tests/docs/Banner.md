@@ -11,7 +11,7 @@ Banner.vue Implementation Tests:
     }
 
 Тест: initializes with message
-Цель: проверить ожидаемые значения данных при работе с компонентом
+Цель: проверить ожидаемую работу компонента
 Тип: positive
 Входные данные: { 
     bannerMessage: 'Banner message 123' 
@@ -25,5 +25,5 @@ Banner.vue Implementation Tests:
 Тест: emits an event when the clear button is clicked
 Цель: проверить работу связи компонента с родителем
 Тип: positive
-Входные данные: -
+Входные данные: нажатие кнопки clear
 Ожидаемый результат: отправка сигнала 'clear-banner' родительскому компоненту

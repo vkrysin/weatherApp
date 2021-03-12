@@ -15,11 +15,15 @@ export default {
       this.$store.state.favoritePlaces[this.$store.state.userName].splice(indexOfRecord, 1)
     },
     autoSearch () {
-      this.$store.state.inputCity.value = this.cityName
-      this.$store.state.inputCity.dispatchEvent(new Event('input'))
-      setTimeout(() => {
-        this.$store.state.searchBtn.click()
-      }, 1)
+      this.$store.state.inputCity = this.cityName.toLowerCase()
+
+      if (this.$store.state.searchBtn !== '') {
+        this.$store.state.inputCity.dispatchEvent(new Event('input'))
+
+        setTimeout(() => {
+          this.$store.state.searchBtn.click()
+        }, 1)
+      }
     }
   }
 }

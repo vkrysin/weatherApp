@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import Weather from '@/components/Weather.vue'
 
-describe('Weather.vue Implementation Test', () => {
+describe('Weather.vue Implementation Tests', () => {
   let wrapper = null
 
   // SETUP - run before to each unit test
