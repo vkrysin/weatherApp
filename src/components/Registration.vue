@@ -8,11 +8,15 @@
           <div class="description">
             <p>Registration will access you to additional features!</p>
           </div>
+          <div v-if="isEmailInBase" class="wrong-data">The user with email {{email}} has already been registered</div>
+          <div v-if="isUserEmailIncorrect && this.email !== ''" class="wrong-data">Please, enter correct email.</div>
           <div class="input">
-            <input type="text" class="button" ref="email" id="email" name="email" placeholder="NAME@EXAMPLE.COM" autocomplete="off">
-            <input type="text" class="button" ref="username" id="username" name="username" placeholder="USERNAME" autocomplete="off">
-            <router-link to="/" tag="div">
-              <input v-on:click="setCurrentUserEmail" type="submit" class="button" id="submit" value="SIGN UP">
+            <input v-model="email" type="text" class="button" ref="email" id="email" name="email"
+               placeholder="NAME@EXAMPLE.COM" autocomplete="off">
+            <input v-model="userName" type="text" class="button" ref="username" id="username" name="username"
+             placeholder="USERNAME" autocomplete="off" maxlength="14">
+            <router-link v-if="isUserDataCorrect" to='/' tag="div">
+              <input v-on:click="signUp" type="submit" class="button" id="submit" value="SIGN UP">
             </router-link>
           </div>
       </form>
@@ -24,23 +28,42 @@ export default {
   name: 'Registration',
   data () {
     return {
-      formData: {
-        Email: ''
-      }
+      email: '',
+      userName: '',
+      isUserEmailIncorrect: false
     }
   },
   methods: {
-    setCurrentUserEmail: function () {
+    signUp () {
       // add new user in storage
       this.$store.state.users.push({
-        userEmail: this.$refs.email.value,
-        userName: this.$refs.username.value
+        userEmail: this.email,
+        userName: this.userName
       })
       // add current user email and name
-      this.$store.state.userName = this.$refs.username.value
-      this.$store.commit('setEmail', this.$refs.email.value)
+      this.$store.state.userName = this.userName
+      this.$store.commit('setEmail', this.email)
       // set array for favorite countries
-      this.$store.commit('setInitialFavoritePlaces', this.$refs.username.value)
+      this.$store.commit('setInitialFavoritePlaces', this.userName)
+    },
+    checkEmailCorrectness (email) {
+      this.isUserEmailIncorrect = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    }
+  },
+  computed: {
+    isEmailInBase: function () {
+      return this.$store.state.users.filter(element => {
+        return element.userEmail === this.email
+      }).length > 0
+    },
+    isUserDataCorrect () {
+      this.checkEmailCorrectness(this.email)
+
+      if (this.userName !== '' && !this.isUserEmailIncorrect && this.email !== '') {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }
@@ -56,7 +79,7 @@ body {
 }
 
 form {
-  width: 450px;
+  min-width: 450px;
   margin: 17% auto;
 }
 
@@ -70,7 +93,7 @@ form {
   font-size: 14px;
   letter-spacing: 1px;
   line-height: 1.3em;
-  margin: -2px 0 25px;
+  margin: -2px 0 15px;
 }
 
 .input {
@@ -93,6 +116,9 @@ form {
   letter-spacing: 1px;
   text-indent: 5%;
   border-radius: 5px 0 0 5px;
+  margin-bottom: 10px;
+}
+.wrong-data {
   margin-bottom: 10px;
 }
 #email {

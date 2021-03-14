@@ -15,11 +15,12 @@ export default {
       this.$store.state.favoritePlaces[this.$store.state.userName].splice(indexOfRecord, 1)
     },
     autoSearch () {
-      this.$store.state.inputCity = this.cityName.toLowerCase()
+      this.$store.state.inputCity.value = this.cityName.toLowerCase()
 
       if (this.$store.state.searchBtn !== '') {
+        // inform serach component, that we add input value
         this.$store.state.inputCity.dispatchEvent(new Event('input'))
-
+        // wait while search get our update input event
         setTimeout(() => {
           this.$store.state.searchBtn.click()
         }, 1)
@@ -30,5 +31,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

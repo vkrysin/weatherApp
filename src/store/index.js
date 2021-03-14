@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    // Array of user email that have registrated {emali, name}
+    // Array of user email that have registrated {email, name}
     users: [],
     // object with field {username1: [places1], username2:[places2] }
     favoritePlaces: {},
@@ -31,7 +31,7 @@ const store = new Vuex.Store({
     addToFavorite (state, place) {
       let valueArr = state.favoritePlaces[state.userName] || []
       valueArr.push(place.toLowerCase())
-      // use vue.set for reactivity
+      // use vue.set for reactivity favoritePlaces
       Vue.set(state.favoritePlaces, state.userName, valueArr)
       state.addToFavoriteShow = false
     },

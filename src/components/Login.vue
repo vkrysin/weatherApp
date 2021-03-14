@@ -8,7 +8,7 @@
           <div v-if="errorSignIn" class="wrong-data">Falied to sign-In. Invalid email or user name</div>
           <input type="text" ref="email" class="button" id="email" name="email" placeholder="Enter your email" autocomplete="off">
           <input type="text" ref="username" class="button" id="email" name="username" placeholder="Enter your username" autocomplete="off">
-          <input type="button" class="button" id="submit" value="SIGN IN" @click="findEmailInBase">
+          <input type="button" class="button" id="submit" value="SIGN IN" @click="logIn">
        </form>
   </div>
 </template>
@@ -18,30 +18,32 @@ export default {
   name: 'Login',
   data () {
     return {
-      formData: {
-        Email: ''
-      },
       errorSignIn: false
     }
   },
   methods: {
-    findEmailInBase () {
-      let email = this.$refs.email.value
-      let name = this.$refs.username.value
+    logIn () {
+      let [email, userName] = this.getLogInData()
       // delete null object
       this.$store.state.users = this.$store.state.users.filter(el => el !== null)
 
-      let isUserContainsInBase = this.$store.state.users.filter(element => {
-        return element.userName === name
-      })
-      if (isUserContainsInBase.length > 0) {
+      if (this.isLogInDataContainsInBase(userName, email)) {
         this.$store.state.userEmail = email
-        this.$store.state.userName = name
+        this.$store.state.userName = userName
+        // go to home page
         this.$router.push({ path: '/' })
         this.errorSignIn = false
       } else {
         this.errorSignIn = true
       }
+    },
+    isLogInDataContainsInBase (userName, email) {
+      return (this.$store.state.users.filter(element => {
+        return element.userEmail === email && element.userName === userName
+      })).length > 0
+    },
+    getLogInData () {
+      return [this.$refs.email.value, this.$refs.username.value]
     }
   }
 }
@@ -74,6 +76,7 @@ form {
 .wrong-data {
   width: fit-content;
   background-color: red;
+  margin-bottom: 10px;
 }
 .button {
   height: 44px;

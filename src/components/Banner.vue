@@ -1,7 +1,7 @@
 <template>
   <div v-show="bannerMessage">
-    <span id="errorMessageClear" v-on:click="clearBannerMessage">Clear</span>
     <p>{{ bannerMessage }}</p>
+    <span id="errorMessageClear" v-on:click="clearBannerMessage">Clear</span>
   </div>
 </template>
 
@@ -23,10 +23,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div {
-  width: 100%;
-  display:inline-block;
+  display: flex;
+  width: max-content;
   margin-bottom: 15px;
   background-color: red;
+  margin-left: 140px;
 }
 
 span, p {
@@ -34,15 +35,6 @@ span, p {
   color: white;
   width: auto;
 }
-
-div {
-  float: left;
-}
-
-#errorMessageClear {
-  float: right;
-}
-
 #errorMessageClear:hover {
   color: black;
   cursor: pointer;

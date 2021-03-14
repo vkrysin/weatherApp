@@ -125,6 +125,11 @@ export default {
     exit () {
       this.$store.state.userEmail = ''
       this.$store.state.userName = ''
+      // because vuex doesn't update values manually
+      const localStorage = JSON.parse(window.localStorage.getItem('vuex'))
+      localStorage.userEmail = ''
+      localStorage.userName = ''
+      window.localStorage.setItem('vuex', JSON.stringify(localStorage))
     }
   }
 }
@@ -204,7 +209,7 @@ body {
   margin: auto;
   grid-template-areas:
     "...   header     header     entry exit"
-    "...   banner     banner     ... ..."
+    "...   banner     banner       ... ..."
     "...   search     search     ... ..."
     "...   results    results    ... ..."
     "...   footer     footer     ... ...";

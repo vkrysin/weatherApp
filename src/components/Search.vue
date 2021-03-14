@@ -28,6 +28,7 @@ export default {
     }
   },
   mounted: function () {
+    // add value on this search button and inputCity value in store
     this.$store.state.searchBtn = this.$refs.search
     this.$store.state.inputCity = this.$refs.inputCity
   },
@@ -69,6 +70,7 @@ export default {
 }
 
 .weather-search-title h2 {
+  font-size: 2em;
   text-align: center;
   margin-bottom: 0.5em;
 }
@@ -76,7 +78,7 @@ export default {
 .weather-search-buttons {
   display: flex;
   margin-top: 10px;
-  margin-left: 45px;
+  margin-left: 50px;
 }
 
 .weather-search-input {
@@ -84,12 +86,12 @@ export default {
 }
 
 .weather-search-input label {
-  font-size: 1.35em;
+  font-size: 1.5em;
   margin-right: 0.5em;
 }
 
 .weather-search-input input {
-  font-size: 1.1em;
+  font-size: 1.4em;
 }
 
 .weather-search-buttons button {
