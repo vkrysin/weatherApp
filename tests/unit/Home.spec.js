@@ -19,7 +19,7 @@ const router = new VueRouter(
 )
 const store = new Vuex.Store({
   state: {
-    // Array of user email that have registrated {emali, name}
+    // Array of user email that have registrated {email, name}
     users: [],
     // object with field {username1: [places1], username2:[places2] }
     favoritePlaces: {
