@@ -42,7 +42,7 @@ export default {
       })
       // add current user email and name
       this.$store.state.userName = this.userName
-      this.$store.commit('setEmail', this.email)
+      this.$store.state.userEmail = this.email
       // set array for favorite countries
       this.$store.commit('setInitialFavoritePlaces', this.userName)
     },
