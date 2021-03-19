@@ -121,7 +121,7 @@ describe('Implementation tests of methods', () => {
     wrapper.vm.logIn()
     // check user data initialization
     expect(wrapper.vm.$store.state.userEmail).toMatch('some@mail.ru')
-    expect(wrapper.vm.$store.stateuserName).toMatch('Vlad')
+    expect(wrapper.vm.$store.state.userName).toMatch('Vlad')
 
     expect(wrapper.vm.$router.push).toHaveBeenCalledWith({ path: '/' })
     expect(wrapper.vm.errorSignIn).toBe(false)
