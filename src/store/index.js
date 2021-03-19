@@ -22,9 +22,6 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    setEmail (state, email) {
-      state.userEmail = email
-    },
     setInitialFavoritePlaces (state, userName) {
       Vue.set(state.favoritePlaces, userName, [])
     },
@@ -36,7 +33,7 @@ const store = new Vuex.Store({
       state.addToFavoriteShow = false
     },
     checkShowFavorite (state, inputCity) {
-      if (!state.favoritePlaces[state.userName].includes(inputCity.toLowerCase())) {
+      if (state.userEmail !== '' && !state.favoritePlaces[state.userName].includes(inputCity.toLowerCase())) {
         state.addToFavoriteShow = true
       }
     }

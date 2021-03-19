@@ -36,7 +36,7 @@ const store = new Vuex.Store({
     checkShowFavorite: jest.fn()
   }
 })
-describe('Render elements when component us created', () => {
+describe('Render elements when component is created', () => {
   let wrapper = null
 
   beforeEach(() => {
@@ -48,11 +48,11 @@ describe('Render elements when component us created', () => {
       isUserEmailIncorrect: false
     })
   })
-
   afterEach(() => {
     jest.resetModules()
     jest.clearAllMocks()
   })
+
   it('Render with empty initialize value', () => {
     expect(wrapper.findAll('input').length).toEqual(2)
     // signUp button hide

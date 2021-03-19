@@ -7,7 +7,7 @@
           </div>
           <div v-if="errorSignIn" class="wrong-data">Falied to sign-In. Invalid email or user name</div>
           <input type="text" ref="email" class="button" id="email" name="email" placeholder="Enter your email" autocomplete="off">
-          <input type="text" ref="username" class="button" id="email" name="username" placeholder="Enter your username" autocomplete="off">
+          <input type="text" ref="username" class="button" id="username" name="username" placeholder="Enter your username" autocomplete="off">
           <input type="button" class="button" id="submit" value="SIGN IN" @click="logIn">
        </form>
   </div>
@@ -24,8 +24,6 @@ export default {
   methods: {
     logIn () {
       let [email, userName] = this.getLogInData()
-      // delete null object
-      this.$store.state.users = this.$store.state.users.filter(el => el !== null)
 
       if (this.isLogInDataContainsInBase(userName, email)) {
         this.$store.state.userEmail = email
@@ -83,7 +81,7 @@ form {
   border: none;
 }
 
-#email {
+#email, #username {
   width: 75%;
   background: #FDFCFB;
   font-family: inherit;
