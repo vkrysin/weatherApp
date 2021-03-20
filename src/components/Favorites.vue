@@ -27,8 +27,10 @@ export default {
 .favorites {
   display: flex;
   flex-direction: column;
+  margin-left: 50px;
 }
 .favorites .greetings, h3, li {
+  font-size: 1.5em;
   margin-bottom: 10px;
 }
 .favorites__list {

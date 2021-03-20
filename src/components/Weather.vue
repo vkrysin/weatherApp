@@ -1,6 +1,5 @@
 <template>
   <div class="weather-results-container">
-
     <div class="weather-results-data">
       <div class="weather-results-summary">
         <div class="weather-title">

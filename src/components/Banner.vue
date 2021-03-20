@@ -1,7 +1,7 @@
 <template>
-  <div v-show="bannerMessage" v-bind:style="{ 'background-color': bannerBackgroundColor }">
-    <span id="errorMessageClear" v-on:click="clearBannerMessage">Clear</span>
+  <div v-show="bannerMessage">
     <p>{{ bannerMessage }}</p>
+    <span id="errorMessageClear" v-on:click="clearBannerMessage">Clear</span>
   </div>
 </template>
 
@@ -10,20 +10,7 @@ export default {
   name: 'Banner',
   props: {
     // Message to display on banner
-    bannerMessage: String,
-    // Banner Types: Info, Error, or Success
-    bannerType: String
-  },
-  computed: {
-    bannerBackgroundColor () {
-      if (this.bannerType === 'Error') {
-        return 'red'
-      } else if (this.bannerType === 'Success') {
-        return 'green'
-      } else {
-        return 'blue'
-      }
-    }
+    bannerMessage: String
   },
   methods: {
     clearBannerMessage () {
@@ -36,9 +23,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div {
-  width: 100%;
-  display:inline-block;
+  display: flex;
+  width: max-content;
   margin-bottom: 15px;
+  background-color: red;
+  margin-left: 140px;
 }
 
 span, p {
@@ -46,15 +35,6 @@ span, p {
   color: white;
   width: auto;
 }
-
-div {
-  float: left;
-}
-
-#errorMessageClear {
-  float: right;
-}
-
 #errorMessageClear:hover {
   color: black;
   cursor: pointer;

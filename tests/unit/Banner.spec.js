@@ -18,8 +18,7 @@ describe('Banner.vue Implementation Test', () => {
     // render the component
     wrapper = shallowMount(Banner, {
       propsData: {
-        bannerMessage: '',
-        bannerType: ''
+        bannerMessage: ''
       }
     })
 
@@ -28,61 +27,25 @@ describe('Banner.vue Implementation Test', () => {
 
     // check that each element of the user is initialized to empty strings
     expect(wrapper.vm.bannerMessage).toMatch('')
-    expect(wrapper.vm.bannerType).toMatch('')
-    expect(wrapper.vm.bannerBackgroundColor).toMatch('blue')
   })
 
-  it('initializes with error message', () => {
+  it('initializes with message', () => {
     // render the component
     wrapper = shallowMount(Banner, {
       propsData: {
-        bannerMessage: 'Banner message 123',
-        bannerType: 'Error'
+        bannerMessage: 'Banner message 123'
       }
     })
 
     // check that each element of the user is initialized to empty strings
     expect(wrapper.vm.bannerMessage).toMatch('Banner message 123')
-    expect(wrapper.vm.bannerType).toMatch('Error')
-    expect(wrapper.vm.bannerBackgroundColor).toMatch('red')
-  })
-
-  it('initializes with success message', () => {
-    // render the component
-    wrapper = shallowMount(Banner, {
-      propsData: {
-        bannerMessage: 'Banner message 456',
-        bannerType: 'Success'
-      }
-    })
-
-    // check that each element of the user is initialized to empty strings
-    expect(wrapper.vm.bannerMessage).toMatch('Banner message 456')
-    expect(wrapper.vm.bannerType).toMatch('Success')
-    expect(wrapper.vm.bannerBackgroundColor).toMatch('green')
-  })
-
-  it('initializes with info message', () => {
-    // render the component
-    wrapper = shallowMount(Banner, {
-      propsData: {
-        bannerMessage: 'Banner message 789',
-        bannerType: 'Info'
-      }
-    })
-
-    // check that each element of the user is initialized to empty strings
-    expect(wrapper.vm.bannerMessage).toMatch('Banner message 789')
-    expect(wrapper.vm.bannerType).toMatch('Info')
-    expect(wrapper.vm.bannerBackgroundColor).toMatch('blue')
   })
 
   it('emits an event when the clear button is clicked', () => {
     // render the component
     wrapper = shallowMount(Banner, {
       propsData: {
-        bannerMessage: 'Banner message 123',
-        bannerType: 'Error'
+        bannerMessage: 'Banner message 123'
       }
     })
 
