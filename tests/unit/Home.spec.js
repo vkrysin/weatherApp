@@ -61,7 +61,7 @@ const store = new Vuex.Store({
 // Spy the console log
 global.console.log = jest.fn()
 
-describe('Implementation Test for App.vue with Successful HTTP GET', () => {
+describe('Implementation Test for Home.vue with Successful HTTP GET', () => {
   let wrapper = null
 
   beforeEach(() => {
@@ -294,5 +294,79 @@ describe('Behavioral Test for Home.vue with Successful HTTP GET', () => {
     expect(wrapper.findAll('button').at(0).element.disabled).toBeFalsy()
     expect(wrapper.findAll('button').at(1).element.disabled).toBeFalsy()
     expect(wrapper.findAll('button').at(1).element.disabled).toBeFalsy()
+  })
+})
+describe('Test vue hooks', () => {
+  let wrapper = null
+
+  afterEach(() => {
+    jest.resetModules()
+    jest.clearAllMocks()
+  })
+  // created
+  it('created_api=ds12fesre_messageType=info', () => {
+    wrapper = mount(Home, { store,
+      localVue,
+      router,
+      data () {
+        return {
+          openweathermapApiKey: 'ds12fesre'
+        }
+      }
+    })
+    // check that the banner message is reset
+    expect(wrapper.vm.messageToDisplay).toMatch('')
+    expect(wrapper.vm.messageType).toMatch('Info')
+  })
+  it('created_api=""_messageType=error', () => {
+    wrapper = mount(Home, { store,
+      localVue,
+      router,
+      data () {
+        return {
+          openweathermapApiKey: ''
+        }
+      }
+    })
+    // check that the banner message is error
+    expect(wrapper.vm.messageToDisplay).toMatch('Error! API Key needs to be loaded to use openweathermap.org!')
+    expect(wrapper.vm.messageType).toMatch('Error')
+  })
+})
+
+describe('Test vue methods', () => {
+  let wrapper = null
+
+  beforeEach(() => {
+    // render the component
+    wrapper = mount(Home, { store, localVue, router })
+  })
+
+  afterEach(() => {
+    jest.resetModules()
+    jest.clearAllMocks()
+  })
+  // Exit
+  it('Implementation exit test', () => {
+    const localStorageMock = {
+      userEmail: 'some@mail.ru',
+      userName: 'Vlad',
+      getItem: jest.fn(),
+      setItem: jest.fn(),
+      clear: jest.fn()
+    }
+    JSON.parse = jest.fn().mockImplementation(() => localStorageMock)
+    Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+
+    wrapper.vm.exit()
+
+    expect(wrapper.vm.$store.state.userEmail).toBe('')
+    expect(wrapper.vm.$store.state.userName).toBe('')
+    expect(wrapper.vm.$store.state.addToFavoriteShow).toBe(false)
+
+    expect(localStorageMock.getItem).toHaveBeenCalledTimes(1)
+    expect(localStorageMock.userEmail).toBe('')
+    expect(localStorageMock.userName).toBe('')
+    expect(localStorageMock.setItem).toHaveBeenCalledTimes(1)
   })
 })

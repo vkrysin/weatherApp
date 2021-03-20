@@ -23,8 +23,8 @@ const store = new Vuex.Store({
     },
     userEmail: 'vk@mail.ru',
     userName: 'Vlad',
-    searchBtn: '',
-    inputCity: '',
+    searchBtn: {},
+    inputCity: {},
     addToFavoriteShow: false
   },
   getters: {
@@ -92,7 +92,18 @@ describe('Implementation Test for favoriteRecord', () => {
     expect(wrapper.vm.$store.state.favoritePlaces[wrapper.vm.$store.state.userName]).toEqual(
       expect.not.arrayContaining(['moscow']))
   })
-  // broken test
-  /* it('autoSearch_buttonWithTextMoscow_findTheWeatherInMoscow', () => {
-  }) */
+  // autoSearch
+  it('autoSearch_buttonWithTextMoscow_clickOnButtonSearchFromSearchComponent', () => {
+    wrapper.vm.$store.state.searchBtn.click = jest.fn()
+    wrapper.vm.$store.state.inputCity.dispatchEvent = jest.fn()
+    wrapper.vm.autoSearch()
+
+    expect(wrapper.vm.$store.state.inputCity.value).toEqual('moscow')
+
+    expect(wrapper.vm.$store.state.inputCity.dispatchEvent).toHaveBeenCalledWith(new Event('input'))
+    // wait while time will pass (1ms)
+    setTimeout(() => {
+      expect(wrapper.vm.$store.state.searchBtn.click).toHaveBeenCalledTimes(1)
+    }, 1)
+  })
 })
