@@ -9,6 +9,7 @@ const localVue = createLocalVue()
 
 localVue.use(Vuex)
 localVue.use(VueRouter)
+jest.useFakeTimers()
 
 const router = new VueRouter(
   routes
@@ -19,9 +20,9 @@ const store = new Vuex.Store({
     users: [],
     // object with field {username1: [places1], username2:[places2] }
     favoritePlaces: {
-      'Vlad': ['chicago', 'paris', 'moscow']
+      Vlad: ['chicago', 'paris', 'moscow']
     },
-    userEmail: 'vk@mail.ru',
+    userEmail: 'some@mail.ru',
     userName: 'Vlad',
     searchBtn: {},
     inputCity: {},
@@ -86,11 +87,29 @@ describe('Implementation Test for favoriteRecord', () => {
     expect(wrapper.vm.$store.state.favoritePlaces[wrapper.vm.$store.state.userName]).toEqual(
       expect.arrayContaining(['moscow']))
 
-    wrapper.findAll('button').at(1).trigger('click')
+    const localStorageMock = {
+      favoritePlaces: {
+        Vlad: ['chicago', 'paris', 'moscow']
+      },
+      userEmail: 'some@mail.ru',
+      userName: 'Vlad',
+      getItem: jest.fn(),
+      setItem: jest.fn(),
+      clear: jest.fn()
+    }
+    JSON.parse = jest.fn().mockImplementation(() => localStorageMock)
+    Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+
+    wrapper.vm.clear()
 
     // store doesn't conatin moscow
     expect(wrapper.vm.$store.state.favoritePlaces[wrapper.vm.$store.state.userName]).toEqual(
       expect.not.arrayContaining(['moscow']))
+    // local storage doesn't contain moscow
+    expect(localStorageMock.favoritePlaces[localStorageMock.userName]).toEqual(
+      expect.not.arrayContaining(['moscow']))
+
+    expect(localStorageMock.setItem).toHaveBeenCalledTimes(1)
   })
   // autoSearch
   it('autoSearch_buttonWithTextMoscow_clickOnButtonSearchFromSearchComponent', () => {
@@ -102,8 +121,7 @@ describe('Implementation Test for favoriteRecord', () => {
 
     expect(wrapper.vm.$store.state.inputCity.dispatchEvent).toHaveBeenCalledWith(new Event('input'))
     // wait while time will pass (1ms)
-    setTimeout(() => {
-      expect(wrapper.vm.$store.state.searchBtn.click).toHaveBeenCalledTimes(1)
-    }, 1)
+    jest.advanceTimersByTime(1)
+    expect(wrapper.vm.$store.state.searchBtn.click).toHaveBeenCalledTimes(1)
   })
 })
