@@ -62,11 +62,6 @@ export default {
       openweathermapApiKey: '4ad5cbc32c39d982d11436dff37d0dd3'
     }
   },
-  computed: {
-    userEmail () {
-      return this.$store.state.userEmail
-    }
-  },
   created () {
     // Perform a check that the API key from openweathermap.org is defined
     if (this.openweathermapApiKey === '') {
@@ -77,13 +72,12 @@ export default {
   methods: {
     async searchCity (inputCity) {
       // GET request for user data
+      // TODO:если совпадающие города, валидация поиска?
       await axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + inputCity + '&units=metric&appid=' + this.openweathermapApiKey)
         .then((response) => {
           // handle success
           // this.messageType = 'Success'
           // this.messageToDisplay = 'SUCCESS! Weather data was retrieved for ' + response.data.name + '!'
-          console.log(response)
-
           this.weatherData.city = response.data.name
           this.weatherData.weatherSummary = response.data.weather[0].main
           this.weatherData.weatherDescription = response.data.weather[0].description
@@ -96,9 +90,11 @@ export default {
         })
         .catch((error) => {
           // handle error
+          let t = error
+
           this.messageType = 'Error'
           this.messageToDisplay = 'ERROR! Unable to retrieve weather data for ' + inputCity + '!'
-          console.log(error.message)
+          console.log(t.message)
           this.resetData()
         })
         .finally((response) => {
@@ -125,10 +121,13 @@ export default {
     exit () {
       this.$store.state.userEmail = ''
       this.$store.state.userName = ''
+      this.$store.state.addToFavoriteShow = false
+
       // because vuex doesn't update values manually
       const localStorage = JSON.parse(window.localStorage.getItem('vuex'))
       localStorage.userEmail = ''
       localStorage.userName = ''
+      localStorage.addToFavoriteShow = false
       window.localStorage.setItem('vuex', JSON.stringify(localStorage))
     }
   }
