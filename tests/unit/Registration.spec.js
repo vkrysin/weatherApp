@@ -79,11 +79,6 @@ describe('Implementation tests of methods', () => {
     jest.resetModules()
     jest.clearAllMocks()
   })
-  it('checkEmailCorrectness_some@mail.ru_isUserEmailIncorrect=false', () => {
-    // input correct email
-    wrapper.vm.checkEmailCorrectness('some@mail.ru')
-    expect(wrapper.vm.isUserEmailIncorrect).toBe(false)
-  })
 
   describe('checkEmailCorrectness', () => {
     it('checkEmailCorrectness_some@mail.ru_isUserEmailIncorrect=false', () => {
@@ -94,6 +89,31 @@ describe('Implementation tests of methods', () => {
     it('checkEmailCorrectness_OOooOO.ru_isUserEmailIncorrect=true', () => {
       // input incorrect email
       wrapper.vm.checkEmailCorrectness('OOooOO.ru')
+      expect(wrapper.vm.isUserEmailIncorrect).toBe(true)
+    })
+    it('checkEmailCorrectness_OOoo@.@.ru_isUserEmailIncorrect=true', () => {
+      // input incorrect email
+      wrapper.vm.checkEmailCorrectness('OOoo@.@.ru')
+      expect(wrapper.vm.isUserEmailIncorrect).toBe(true)
+    })
+    it('checkEmailCorrectness_@.@.ru_isUserEmailIncorrect=true', () => {
+      // input incorrect email
+      wrapper.vm.checkEmailCorrectness('@.@.ru')
+      expect(wrapper.vm.isUserEmailIncorrect).toBe(true)
+    })
+    it('checkEmailCorrectness_!@!_isUserEmailIncorrect=true', () => {
+      // input incorrect email
+      wrapper.vm.checkEmailCorrectness('!@!')
+      expect(wrapper.vm.isUserEmailIncorrect).toBe(true)
+    })
+    it('checkEmailCorrectness_a@a_isUserEmailIncorrect=true', () => {
+      // input incorrect email
+      wrapper.vm.checkEmailCorrectness('a@a')
+      expect(wrapper.vm.isUserEmailIncorrect).toBe(true)
+    })
+    it('checkEmailCorrectness_---@.ru_isUserEmailIncorrect=true', () => {
+      // input incorrect email
+      wrapper.vm.checkEmailCorrectness('---@.ru')
       expect(wrapper.vm.isUserEmailIncorrect).toBe(true)
     })
   })

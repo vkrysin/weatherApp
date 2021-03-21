@@ -8,6 +8,7 @@ import Vue from 'vue'
 
 // Mock the axios library
 jest.mock('axios')
+jest.useFakeTimers()
 
 const localVue = createLocalVue()
 
@@ -49,13 +50,8 @@ const store = new Vuex.Store({
       Vue.set(state.favoritePlaces, state.userName, valueArr)
       state.addToFavoriteShow = false
     },
-    checkShowFavorite (state, inputCity) {
-      if (!state.favoritePlaces[state.userName].includes(inputCity.toLowerCase())) {
-        state.addToFavoriteShow = true
-      }
-    }
-  },
-  actions: {}
+    checkShowFavorite: jest.fn()
+  }
 })
 
 // Spy the console log
@@ -206,8 +202,6 @@ describe('Implementation Test for Home.vue with Failed HTTP GET', () => {
     // check that the banner message indicates failure
     expect(wrapper.vm.messageToDisplay).toMatch('ERROR! Unable to retrieve weather data for Chicago!')
     expect(wrapper.vm.messageType).toMatch('Error')
-
-    expect(global.console.log).toHaveBeenCalledWith('BAD REQUEST')
   })
 })
 
@@ -296,7 +290,7 @@ describe('Behavioral Test for Home.vue with Successful HTTP GET', () => {
     expect(wrapper.findAll('button').at(1).element.disabled).toBeFalsy()
   })
 })
-describe('Test vue hooks', () => {
+describe('Test home hooks', () => {
   let wrapper = null
 
   afterEach(() => {
@@ -331,42 +325,5 @@ describe('Test vue hooks', () => {
     // check that the banner message is error
     expect(wrapper.vm.messageToDisplay).toMatch('Error! API Key needs to be loaded to use openweathermap.org!')
     expect(wrapper.vm.messageType).toMatch('Error')
-  })
-})
-
-describe('Test vue methods', () => {
-  let wrapper = null
-
-  beforeEach(() => {
-    // render the component
-    wrapper = mount(Home, { store, localVue, router })
-  })
-
-  afterEach(() => {
-    jest.resetModules()
-    jest.clearAllMocks()
-  })
-  // Exit
-  it('Implementation exit test', () => {
-    const localStorageMock = {
-      userEmail: 'some@mail.ru',
-      userName: 'Vlad',
-      getItem: jest.fn(),
-      setItem: jest.fn(),
-      clear: jest.fn()
-    }
-    JSON.parse = jest.fn().mockImplementation(() => localStorageMock)
-    Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-
-    wrapper.vm.exit()
-
-    expect(wrapper.vm.$store.state.userEmail).toBe('')
-    expect(wrapper.vm.$store.state.userName).toBe('')
-    expect(wrapper.vm.$store.state.addToFavoriteShow).toBe(false)
-
-    expect(localStorageMock.getItem).toHaveBeenCalledTimes(1)
-    expect(localStorageMock.userEmail).toBe('')
-    expect(localStorageMock.userName).toBe('')
-    expect(localStorageMock.setItem).toHaveBeenCalledTimes(1)
   })
 })
