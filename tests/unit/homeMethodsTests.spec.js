@@ -1,7 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils'
 import routes from '@/router/index.js'
 import Home from '@/components/Home.vue'
-import axios from 'axios'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import Vue from 'vue'

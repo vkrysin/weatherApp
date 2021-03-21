@@ -161,7 +161,7 @@ body {
   max-width: 180px;
   max-height: 44px;
   color:#ffffff;
-  font-family: Helvetica, Arial, Verdana, Tahoma;
+  font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif;
   font-size:18px;
   font-weight:bold;
   margin-top: 5px;
