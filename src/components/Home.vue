@@ -59,7 +59,7 @@ export default {
       // Message type (Info, Success, or Error) to display on banner
       messageType: 'Info',
       // API key from openweathermap.org - Unique to each person
-      openweathermapApiKey: ''
+      openweathermapApiKey: '4ad5cbc32c39d982d11436dff37d0dd3'
     }
   },
   created () {
@@ -72,11 +72,10 @@ export default {
   methods: {
     async searchCity (inputCity) {
       // GET request for user data
-      // TODO:если совпадающие города, валидация поиска?
       await axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + inputCity + '&units=metric&appid=' + this.openweathermapApiKey)
         .then((response) => {
           // handle success
-          // this.messageType = 'Success'
+          this.messageType = 'Success'
           // this.messageToDisplay = 'SUCCESS! Weather data was retrieved for ' + response.data.name + '!'
           this.weatherData.city = response.data.name
           this.weatherData.weatherSummary = response.data.weather[0].main
@@ -91,7 +90,6 @@ export default {
         .catch((error) => {
           // handle error
           let t = error
-
           this.messageType = 'Error'
           this.messageToDisplay = 'ERROR! Unable to retrieve weather data for ' + inputCity + '!'
           console.log(t.message)
@@ -163,7 +161,7 @@ body {
   max-width: 180px;
   max-height: 44px;
   color:#ffffff;
-  font-family:Arial;
+  font-family: Helvetica, Arial, Verdana, Tahoma;
   font-size:18px;
   font-weight:bold;
   margin-top: 5px;

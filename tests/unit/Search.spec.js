@@ -7,45 +7,46 @@ const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
+const store = new Vuex.Store({
+  state: {
+    // Array of user email that have registrated {emali, name}
+    users: [],
+    // object with field {username1: [places1], username2:[places2] }
+    favoritePlaces: {},
+    userEmail: '',
+    userName: '',
+    searchBtn: '',
+    inputCity: '',
+    addToFavoriteShow: false
+  },
+  getters: {
+    getEmail: (state) => {
+      return state.userEmail
+    }
+  },
+  mutations: {
+    setEmail (state, email) {
+      state.userEmail = email
+    },
+    setInitialFavoritePlaces (state, userName) {
+      Vue.set(state.favoritePlaces, userName, [])
+    },
+    addToFavorite (state, place) {
+      let valueArr = state.favoritePlaces[state.userName] || []
+      valueArr.push(place.toLowerCase())
+      // use vue.set for reactivity
+      Vue.set(state.favoritePlaces, state.userName, valueArr)
+      state.addToFavoriteShow = false
+    }
+  },
+  actions: {}
+})
+
 describe('Search.vue Implementation Test', () => {
   let wrapper = null
 
   // SETUP - run prior to each unit test
   beforeEach(() => {
-    const store = new Vuex.Store({
-      state: {
-        // Array of user email that have registrated {emali, name}
-        users: [],
-        // object with field {username1: [places1], username2:[places2] }
-        favoritePlaces: {},
-        userEmail: '',
-        userName: '',
-        searchBtn: '',
-        inputCity: '',
-        addToFavoriteShow: false
-      },
-      getters: {
-        getEmail: (state) => {
-          return state.userEmail
-        }
-      },
-      mutations: {
-        setEmail (state, email) {
-          state.userEmail = email
-        },
-        setInitialFavoritePlaces (state, userName) {
-          Vue.set(state.favoritePlaces, userName, [])
-        },
-        addToFavorite (state, place) {
-          let valueArr = state.favoritePlaces[state.userName] || []
-          valueArr.push(place.toLowerCase())
-          // use vue.set for reactivity
-          Vue.set(state.favoritePlaces, state.userName, valueArr)
-          state.addToFavoriteShow = false
-        }
-      },
-      actions: {}
-    })
     // render the component
     wrapper = shallowMount(Search, { store, localVue })
   })
@@ -94,40 +95,6 @@ describe('Search.vue Behavioral Test', () => {
 
   // SETUP - run prior to each unit test
   beforeEach(() => {
-    const store = new Vuex.Store({
-      state: {
-        // Array of user email that have registrated {emali, name}
-        users: [],
-        // object with field {username1: [places1], username2:[places2] }
-        favoritePlaces: {},
-        userEmail: '',
-        userName: '',
-        searchBtn: '',
-        inputCity: '',
-        addToFavoriteShow: false
-      },
-      getters: {
-        getEmail: (state) => {
-          return state.userEmail
-        }
-      },
-      mutations: {
-        setEmail (state, email) {
-          state.userEmail = email
-        },
-        setInitialFavoritePlaces (state, userName) {
-          Vue.set(state.favoritePlaces, userName, [])
-        },
-        addToFavorite (state, place) {
-          let valueArr = state.favoritePlaces[state.userName] || []
-          valueArr.push(place.toLowerCase())
-          // use vue.set for reactivity
-          Vue.set(state.favoritePlaces, state.userName, valueArr)
-          state.addToFavoriteShow = false
-        }
-      },
-      actions: {}
-    })
     // render the component
     wrapper = shallowMount(Search, { store, localVue })
   })
