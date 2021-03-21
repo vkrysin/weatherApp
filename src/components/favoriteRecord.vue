@@ -1,8 +1,10 @@
 <template>
-  <li>
-    <button @click="autoSearch">{{cityName}}</button>
-    <button class="delete" @click="clear"><img src="../assets/redCross.png"></button>
-  </li>
+    <ul>
+      <li>
+        <button @click="autoSearch">{{cityName}}</button>
+        <button class="delete" @click="clear"><img src="../assets/redCross.png" alt="delete"></button>
+      </li>
+    </ul>
 </template>
 
 <script>
@@ -37,6 +39,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

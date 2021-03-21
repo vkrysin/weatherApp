@@ -62,8 +62,4 @@ export default {
   vertical-align: middle;
   height: 16px;
 }
-.favorites__list .delete img {
-  vertical-align: middle;
-  height: 16px;
-}
 </style>
