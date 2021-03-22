@@ -1,12 +1,12 @@
 import { mutations } from '@/store/index.js'
 // setInitialFavoritePlaces
-test('setInitialFavoritePlaces_[]_[]', () => {
+test('setInitialFavoritePlaces_userName_[]', () => {
   const state = {
     favoritePlaces: {}
   }
 
-  mutations.setInitialFavoritePlaces(state, 'Vlad')
-  expect(state.favoritePlaces.Vlad).toEqual([])
+  mutations.setInitialFavoritePlaces(state, 'userName')
+  expect(state.favoritePlaces.userName).toEqual([])
 })
 // checkShowFavorite
 test('checkShowFavorite_milanHasAlreadyBeenAdded', () => {
