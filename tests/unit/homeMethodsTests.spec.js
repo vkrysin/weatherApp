@@ -54,6 +54,7 @@ describe('Test home methods', () => {
   beforeEach(() => {
     // render the component
     wrapper = mount(Home, { store, localVue, router })
+    wrapper.vm.openweathermapApiKey = '4ad5cbc32c39d982d11436dff37d0dd3'
   })
 
   afterEach(() => {
