@@ -6,6 +6,7 @@
 ## Description
 
 The Vue Weather App allows the user to search for the current weather for a city, also user can register and add favorite places. This application was developed to provide examples of how to unit test Vue components.
+You can view this app on http://weather-app-91.herokuapp.com/
 
 ## Example
 
@@ -15,8 +16,8 @@ The Vue Weather App allows the user to search for the current weather for a city
 
 If you would like to run the Vue Weather App on your local machine, you will need to follow these instructions:
 
-1. > clone this repo 
-2. > npm i 
+1. > clone this repo
+2. > npm i
 
 Additionally, you will need to create a free account at [Open Weather](https://openweathermap.org) and get an API key for using their API service.  The API key can be found in your account page under the 'API Keys' tab.  The API key needs to be included in the `App` component (defined in /src/App.vue) in the data section:
 
