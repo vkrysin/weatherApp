@@ -12,6 +12,7 @@
       <app-weather-search class="weather-search" v-on:search-city="searchCity"></app-weather-search>
       <app-weather-results class="weather-results" v-bind="weatherData" v-if="validWeatherData" v-on:clear-weather-data="resetData"></app-weather-results>
       <app-footer class="footer" v-bind:message="footerMessage"></app-footer>
+
     </div>
   </div>
 </template>
@@ -59,7 +60,7 @@ export default {
       // Message type (Info, Success, or Error) to display on banner
       messageType: 'Info',
       // API key from openweathermap.org - Unique to each person
-      openweathermapApiKey: ''
+      openweathermapApiKey: '4ad5cbc32c39d982d11436dff37d0dd3'
     }
   },
   created () {
@@ -87,17 +88,10 @@ export default {
           // show addToFavorite button(yellow star)
           this.$store.commit('checkShowFavorite', inputCity)
         })
-        .catch((error) => {
-          // handle error
-          let t = error
+        .catch(() => {
           this.messageType = 'Error'
           this.messageToDisplay = 'ERROR! Unable to retrieve weather data for ' + inputCity + '!'
-          console.log(t.message)
           this.resetData()
-        })
-        .finally((response) => {
-          // always executed
-          console.log('HTTP GET Finished!')
         })
     },
     resetData () {
