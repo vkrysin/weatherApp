@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/vladkrysin/weatherApp.svg?branch=master)](https://travis-ci.com/vladkrysin/weatherApp)
+[![Build Status](https://travis-ci.com/vkrysin/weatherApp.svg?branch=master)](https://travis-ci.com/vladkrysin/weatherApp)
 [![Coverage Status](https://coveralls.io/repos/github/vladkrysin/weatherApp/badge.svg?branch=master)](https://coveralls.io/github/vladkrysin/weatherApp?branch=master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vladkrysin_weatherApp&metric=alert_status)](https://sonarcloud.io/dashboard?id=vladkrysin_weatherApp)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=vladkrysin_weatherApp&metric=bugs)](https://sonarcloud.io/dashboard?id=vladkrysin_weatherApp)
